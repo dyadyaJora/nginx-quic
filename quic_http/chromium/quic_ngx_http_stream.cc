@@ -86,7 +86,7 @@ bool QuicNgxHttpStream::SendHttpHeaders(const char* data, int len) {
   std::string http_status("");
   auto it_status = spdy_headers.find(":status");
   if (it_status != spdy_headers.end()) {
-    http_status = it_status->second.as_string();
+    http_status = std::string(it_status->second);
   }
   // std::string http_ver("");
   // auto it_ver = proxy->spdy_headers_.find(":ver");
@@ -97,7 +97,7 @@ bool QuicNgxHttpStream::SendHttpHeaders(const char* data, int len) {
   std::string transfer_encoding("");
   auto it_transfer_encoding = spdy_headers.find("transfer-encoding");
   if (it_transfer_encoding != spdy_headers.end()) {
-    transfer_encoding = it_transfer_encoding->second.as_string();
+    transfer_encoding = std::string(it_transfer_encoding->second);
   }
 
   if (transfer_encoding == "chunked") {
